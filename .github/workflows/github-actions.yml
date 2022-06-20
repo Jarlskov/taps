@@ -30,9 +30,6 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist
 
-      - name: Run tests
-        run: composer run-script test
-
       - name: Run phpcpd
         run: phpcpd --fuzzy app
 
