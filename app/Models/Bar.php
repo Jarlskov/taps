@@ -31,7 +31,7 @@ class Bar extends Model
 
     public function updateTaplist()
     {
-        $scraper = new ($this->class)($this);
+        $scraper = new $this->class($this);
         $scraper->scrape();
     }
 }
