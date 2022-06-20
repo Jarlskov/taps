@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "81967e4fd79fe92eadb852de701be1ff",
+    "content-hash": "d83f8c0fa682e5515351c2aa138517a1",
     "packages": [
         {
             "name": "brick/math",
@@ -495,16 +495,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "3.2",
+            "version": "3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "a5ed8d58ed0c340a7c2109f587951b1c84cf6286"
+                "reference": "f88dcf4b14af14a98ad96b14b2b317969eab6715"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/a5ed8d58ed0c340a7c2109f587951b1c84cf6286",
-                "reference": "a5ed8d58ed0c340a7c2109f587951b1c84cf6286",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/f88dcf4b14af14a98ad96b14b2b317969eab6715",
+                "reference": "f88dcf4b14af14a98ad96b14b2b317969eab6715",
                 "shasum": ""
             },
             "require": {
@@ -551,7 +551,7 @@
             ],
             "support": {
                 "issues": "https://github.com/egulias/EmailValidator/issues",
-                "source": "https://github.com/egulias/EmailValidator/tree/3.2"
+                "source": "https://github.com/egulias/EmailValidator/tree/3.2.1"
             },
             "funding": [
                 {
@@ -559,7 +559,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-05-28T22:19:18+00:00"
+            "time": "2022-06-18T20:57:19+00:00"
         },
         {
             "name": "evenement/evenement",
@@ -1125,16 +1125,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Jarlskov/laravel-untappd.git",
-                "reference": "9bd639ef77ee7b9b59a88f729bdad26e2ea7e47d"
+                "reference": "8efc92b38e9b0cd5cd8015fe01de9e4a318630a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Jarlskov/laravel-untappd/zipball/9bd639ef77ee7b9b59a88f729bdad26e2ea7e47d",
-                "reference": "9bd639ef77ee7b9b59a88f729bdad26e2ea7e47d",
+                "url": "https://api.github.com/repos/Jarlskov/laravel-untappd/zipball/8efc92b38e9b0cd5cd8015fe01de9e4a318630a5",
+                "reference": "8efc92b38e9b0cd5cd8015fe01de9e4a318630a5",
                 "shasum": ""
             },
             "require": {
-                "jarlskov/untappd": "^0.0.1"
+                "jarlskov/untappd": "*"
             },
             "default-branch": true,
             "type": "library",
@@ -1160,22 +1160,22 @@
             "description": "Small library that makes it easy to use the Jarlskov/Untappd API wrapper in your Laravel project.",
             "support": {
                 "issues": "https://github.com/Jarlskov/laravel-untappd/issues",
-                "source": "https://github.com/Jarlskov/laravel-untappd/tree/develop"
+                "source": "https://github.com/Jarlskov/laravel-untappd/tree/v0.0.2"
             },
-            "time": "2022-06-18T08:21:32+00:00"
+            "time": "2022-06-19T09:57:46+00:00"
         },
         {
             "name": "jarlskov/untappd",
-            "version": "0.0.1",
+            "version": "0.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Jarlskov/Untappd.git",
-                "reference": "c5d5311afa8e1eb025c317a28d6fa9d8b1a9d912"
+                "reference": "134492f8317b7f53e8a771d2ae740af6bfcbfe51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Jarlskov/Untappd/zipball/c5d5311afa8e1eb025c317a28d6fa9d8b1a9d912",
-                "reference": "c5d5311afa8e1eb025c317a28d6fa9d8b1a9d912",
+                "url": "https://api.github.com/repos/Jarlskov/Untappd/zipball/134492f8317b7f53e8a771d2ae740af6bfcbfe51",
+                "reference": "134492f8317b7f53e8a771d2ae740af6bfcbfe51",
                 "shasum": ""
             },
             "require": {
@@ -1197,9 +1197,9 @@
             "description": "Untappd.com API wrapper in PHP.",
             "support": {
                 "issues": "https://github.com/Jarlskov/Untappd/issues",
-                "source": "https://github.com/Jarlskov/Untappd/tree/v0.0.1"
+                "source": "https://github.com/Jarlskov/Untappd/tree/v0.0.2"
             },
-            "time": "2022-06-18T07:55:20+00:00"
+            "time": "2022-06-19T10:38:31+00:00"
         },
         {
             "name": "laravel/framework",

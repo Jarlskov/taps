@@ -1,14 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBarRequest;
-use App\Http\Requests\UpdateBarRequest;
-use App\Models\Bar;
+use App\Http\Requests\StoreBreweryRequest;
+use App\Http\Requests\UpdateBreweryRequest;
+use App\Models\Brewery;
 
-class BarController extends Controller
+class BreweryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +15,7 @@ class BarController extends Controller
      */
     public function index()
     {
-        return Bar::all();
+        //
     }
 
     /**
@@ -33,10 +31,10 @@ class BarController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreBarRequest  $request
+     * @param  \App\Http\Requests\StoreBreweryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBarRequest $request)
+    public function store(StoreBreweryRequest $request)
     {
         //
     }
@@ -44,25 +42,21 @@ class BarController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Bar  $bar
+     * @param  \App\Models\Brewery  $brewery
      * @return \Illuminate\Http\Response
      */
-    public function show(Bar $bar)
+    public function show(Brewery $brewery)
     {
-        return $bar->load('taps')
-                   ->load(['taps.beer' => function ($query) {
-                       $query->where('on_to', null);
-                   }])
-                   ->load(['taps.beer.beer']);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Bar  $bar
+     * @param  \App\Models\Brewery  $brewery
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bar $bar)
+    public function edit(Brewery $brewery)
     {
         //
     }
@@ -70,11 +64,11 @@ class BarController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateBarRequest  $request
-     * @param  \App\Models\Bar  $bar
+     * @param  \App\Http\Requests\UpdateBreweryRequest  $request
+     * @param  \App\Models\Brewery  $brewery
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBarRequest $request, Bar $bar)
+    public function update(UpdateBreweryRequest $request, Brewery $brewery)
     {
         //
     }
@@ -82,10 +76,10 @@ class BarController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Bar  $bar
+     * @param  \App\Models\Brewery  $brewery
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bar $bar)
+    public function destroy(Brewery $brewery)
     {
         //
     }
