@@ -43,8 +43,12 @@ class UpdateTapByUntappdId implements ShouldQueue
      *
      * @return void
      */
-    public function handle(BeerRepository $beerRepository, BreweryRepository $breweryRepository, Untappd $untappd, UntappdMapper $mapper)
-    {
+    public function handle(
+        BeerRepository $beerRepository,
+        BreweryRepository $breweryRepository,
+        Untappd $untappd,
+        UntappdMapper $mapper
+    ) {
         $beer = $this->getBeer($beerRepository, $breweryRepository, $untappd, $mapper);
         if (!is_null($beer)) {
             Tap::find($this->tapId)
@@ -54,8 +58,12 @@ class UpdateTapByUntappdId implements ShouldQueue
         }
     }
 
-    private function getBeer(BeerRepository $beerRepository, BreweryRepository $breweryRepository, Untappd $untappd, UntappdMapper $mapper)
-    {
+    private function getBeer(
+        BeerRepository $beerRepository,
+        BreweryRepository $breweryRepository,
+        Untappd $untappd,
+        UntappdMapper $mapper
+    ) {
         $beer = $beerRepository->findByUntappdId($this->untappdId);
         if ($beer) {
             return $beer;
