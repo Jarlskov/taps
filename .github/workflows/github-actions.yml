@@ -1,0 +1,47 @@
+name: Github Actions
+on: [push]
+jobs:
+  Run-Tests:
+    strategy:
+      matrix:
+        php:
+          - "8.0"
+          - "8.1"
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup PHP Action
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "${{ matrix.php }}"
+          extensions: sqlite
+          tools: phpcpd, phpcs, phpmd
+
+      - uses: actions/checkout@v3
+
+      - name: Cache Composer Packages
+        id: composer-cache
+        uses: actions/cache@v3
+        with:
+          path: "::set-output name=dir::$(composer config cache-files-dir)"
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist
+
+      - name: Run tests
+        run: composer run-script test
+
+      - name: Run phpcpd
+        run: phpcpd --fuzzy app
+
+      - name: Run phpcs
+        run: phpcs --standard=PSR1,PSR2 app 
+
+      - name: Run phpmd
+        run: phpmd app github codesize,naming,design
+
+      - name: Run phpstan
+        run: ./vendor/bin/phpstan analyse
+
