@@ -12,7 +12,7 @@ class Bar extends Model
 {
     use HasFactory;
 
-    public function getOrCreateTapByName($name): Tap
+    public function getOrCreateTapByName(string $name): Tap
     {
         $tap = $this->taps()->where(['name' => $name])->first();
         if (!$tap) {
@@ -29,7 +29,7 @@ class Bar extends Model
         return $this->hasMany(Tap::class);
     }
 
-    public function updateTaplist()
+    public function updateTaplist(): void
     {
         $scraper = new $this->class($this);
         $scraper->scrape();

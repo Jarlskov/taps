@@ -12,7 +12,6 @@ use Symfony\Component\DomCrawler\Crawler;
 class FermentorenScraper implements ScraperInterface
 {
     private Bar $bar;
-    private string $client;
     private string $url = 'https://fermentoren.com/';
 
     public function __construct(Bar $bar)
@@ -20,7 +19,7 @@ class FermentorenScraper implements ScraperInterface
         $this->bar = $bar;
     }
 
-    public function scrape()
+    public function scrape(): void
     {
         $page = (new BrowserFactory())->createBrowser()->createPage();
         $page->navigate($this->url)->waitForNavigation();

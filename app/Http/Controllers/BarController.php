@@ -25,7 +25,7 @@ class BarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): Void
     {
         //
     }
@@ -36,7 +36,7 @@ class BarController extends Controller
      * @param  \App\Http\Requests\StoreBarRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBarRequest $request)
+    public function store(StoreBarRequest $request): Void
     {
         //
     }
@@ -62,7 +62,7 @@ class BarController extends Controller
      * @param  \App\Models\Bar  $bar
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bar $bar)
+    public function edit(Bar $bar): Void
     {
         //
     }
@@ -74,7 +74,7 @@ class BarController extends Controller
      * @param  \App\Models\Bar  $bar
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBarRequest $request, Bar $bar)
+    public function update(UpdateBarRequest $request, Bar $bar): Void
     {
         //
     }
@@ -85,7 +85,7 @@ class BarController extends Controller
      * @param  \App\Models\Bar  $bar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bar $bar)
+    public function destroy(Bar $bar): Void
     {
         //
     }

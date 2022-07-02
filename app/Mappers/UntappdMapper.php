@@ -13,11 +13,8 @@ use Jarlskov\Untappd\Models\Brewery as UntappdBrewery;
 
 class UntappdMapper
 {
-    private $breweryRepository;
-
-    public function __construct(BreweryRepository $breweryRepository)
+    public function __construct()
     {
-        $this->breweryRepository = $breweryRepository;
     }
 
     public function mapBeer(UntappdBeer $untappdBeer): Beer

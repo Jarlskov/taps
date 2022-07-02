@@ -33,5 +33,7 @@ class UpdateTapLists extends Command
         foreach (Bar::all() as $bar) {
             $bar->updateTaplist();
         }
+
+        return 1;
     }
 }

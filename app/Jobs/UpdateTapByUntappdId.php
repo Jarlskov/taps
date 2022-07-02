@@ -63,7 +63,7 @@ class UpdateTapByUntappdId implements ShouldQueue
         BreweryRepository $breweryRepository,
         Untappd $untappd,
         UntappdMapper $mapper
-    ) {
+    ): Beer {
         $beer = $beerRepository->findByUntappdId($this->untappdId);
         if ($beer) {
             return $beer;
@@ -77,6 +77,8 @@ class UpdateTapByUntappdId implements ShouldQueue
         $beer = $mapper->mapBeer($untappdBeer);
         $beer->brewery()->associate($brewery);
         $beer->save();
+
+        return $beer;
     }
 
     private function createBrewery(UntappdBrewery $untappdBrewery, UntappdMapper $mapper): Brewery

@@ -8,8 +8,8 @@ use App\Models\Brewery;
 
 class BreweryRepository
 {
-    public function findByUntappdId(int $id): ?Brewery
+    public function findByUntappdId(int $untappdId): ?Brewery
     {
-        return Brewery::where(['untappd_id' => $id])->first();
+        return Brewery::where(['untappd_id' => $untappdId])->first();
     }
 }

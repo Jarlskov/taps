@@ -4,13 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Tap extends Model
 {
     use HasFactory;
 
-    public function putOn(Beer $beer)
+    protected $casts = [
+        'on_from' => 'datetime',
+        'on_to' => 'datetime',
+    ];
+
+    public function putOn(Beer $beer): void
     {
         $current = $this->getCurrent();
         if ($current && $current->beer->is($beer)) {
@@ -37,12 +43,12 @@ class Tap extends Model
             ->first();
     }
 
-    public function bar(): Relation
+    public function bar(): BelongsTo
     {
         return $this->belongsTo(Bar::class);
     }
 
-    public function beer(): Relation
+    public function beer(): HasMany
     {
         return $this->hasMany(TapBeer::class);
     }
