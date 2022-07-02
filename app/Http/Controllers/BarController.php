@@ -53,7 +53,7 @@ class BarController extends Controller
                    ->load(['taps.beer' => function ($query) {
                        $query->where('on_to', null);
                    }])
-                   ->load(['taps.beer.beer']);
+                   ->load(['taps.beer.beer', 'taps.beer.beer.brewery']);
     }
 
     /**
