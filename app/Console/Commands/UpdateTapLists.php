@@ -14,7 +14,7 @@ class UpdateTapLists extends Command
      *
      * @var string
      */
-    protected $signature = 'taplists:update';
+    protected $signature = 'taplists:update {bar?}';
 
     /**
      * The console command description.
@@ -30,6 +30,14 @@ class UpdateTapLists extends Command
      */
     public function handle()
     {
+        $barName = $this->argument('bar');
+        if ($barName) {
+            $bar = Bar::where('name', $barName)->firstOrFail();
+            $bar->updateTaplist();
+
+            return 1;
+        }
+
         foreach (Bar::all() as $bar) {
             $bar->updateTaplist();
         }
