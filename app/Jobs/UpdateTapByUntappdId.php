@@ -20,11 +20,10 @@ use Illuminate\Queue\SerializesModels;
 use Jarlskov\Untappd\Untappd;
 use Jarlskov\Untappd\Models\Brewery as UntappdBrewery;
 
-class UpdateTapByUntappdId implements ShouldQueue
+class UpdateTapByUntappdId extends AbstractUpdateTap implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private int $tapId;
     private int $untappdId;
 
     /**
@@ -34,31 +33,11 @@ class UpdateTapByUntappdId implements ShouldQueue
      */
     public function __construct(Tap $tap, int $untappdId)
     {
-        $this->tapId = $tap->id;
+        parent::__construct($tap);
         $this->untappdId = $untappdId;
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
-    public function handle(
-        BeerRepository $beerRepository,
-        BreweryRepository $breweryRepository,
-        Untappd $untappd,
-        UntappdMapper $mapper
-    ) {
-        $beer = $this->getBeer($beerRepository, $breweryRepository, $untappd, $mapper);
-        if (!is_null($beer)) {
-            Tap::find($this->tapId)
-                ->putOn($beer);
-        } else {
-            var_dump($this->untappdId);
-        }
-    }
-
-    private function getBeer(
+    protected function getBeer(
         BeerRepository $beerRepository,
         BreweryRepository $breweryRepository,
         Untappd $untappd,
