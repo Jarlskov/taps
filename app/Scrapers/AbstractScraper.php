@@ -12,13 +12,23 @@ abstract class AbstractScraper implements ScraperInterface
 {
     protected Bar $bar;
     protected string $tableQuery;
+    protected string $url;
 
     public function __construct(Bar $bar)
     {
         $this->bar = $bar;
     }
 
-    protected function scrapeList(string $url): array
+    public function scrape(): void
+    {
+        foreach ($this->scrapeList($this->url) as $index => $node) {
+            $this->handleNode($index, $node);
+        }
+    }
+
+    abstract protected function handleNode(int $index, Crawler $node): void;
+
+    private function scrapeList(string $url): array
     {
         return $this->filterPage($this->getCrawler($url))
              ->each(function ($node) {
@@ -32,7 +42,7 @@ abstract class AbstractScraper implements ScraperInterface
             ->filter($this->tableQuery);
     }
 
-    protected function getCrawler(String $url): Crawler
+    private function getCrawler(String $url): Crawler
     {
         $page = (new BrowserFactory())->createBrowser()->createPage();
         $page->navigate($url)->waitForNavigation();

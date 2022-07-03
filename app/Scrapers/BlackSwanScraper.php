@@ -9,23 +9,19 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class BlackSwanScraper extends AbstractScraper
 {
-    private string $url = 'http://www.blackswanbar.dk/beer';
+    protected string $url = 'http://www.blackswanbar.dk/beer';
 
-    public function scrape(): void
+    protected function handleNode(int $index, Crawler $node): void
     {
-        $tapNumber = 1;
-        foreach ($this->scrapeList($this->url) as $node) {
-            $tap = $this->bar->getOrCreateTapByName((string) $tapNumber);
+        $tap = $this->bar->getOrCreateTapByName((string) ($index + 1));
 
-            $breweryName = $node->filter('td')->first()->text();
-            $beerName = $node->filter('a')->first()->text();
-            UpdateTapByBeerName::dispatch($tap, $beerName, $breweryName);
-            $tapNumber++;
-        }
+        $breweryName = $node->filter('td')->first()->text();
+        $beerName = $node->filter('a')->first()->text();
+        UpdateTapByBeerName::dispatch($tap, $beerName, $breweryName);
     }
 
     protected function filterPage(Crawler $crawler): Crawler
     {
-        return $crawler->filter('table tbody try')->first();
+        return $crawler->filter('table tbody')->first();
     }
 }
