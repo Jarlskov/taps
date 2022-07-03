@@ -12,14 +12,12 @@ class FermentorenScraper extends AbstractScraper
 
     public function scrape(): void
     {
-        $crawler = $this->getCrawler($this->url);
-        // Iterate through each beer on the menu
-        $crawler->filter('.item .item-name a')->each(function ($node) {
+        foreach ($this->scrapeList($this->url, '.item .item-name a') as $node) {
             $tapName = $node->filter('.tap-number-hideable')->first()->text();
             $tap = $this->bar->getOrCreateTapByName($tapName);
 
             $untappdId = $this->getIdFromUrl($node->attr('href'));
             UpdateTapByUntappdId::dispatch($tap, $untappdId);
-        });
+        }
     }
 }

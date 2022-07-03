@@ -17,14 +17,13 @@ abstract class AbstractScraper implements ScraperInterface
         $this->bar = $bar;
     }
 
-    protected function scrapeList(string $url, string $query): Node
+    protected function scrapeList(string $url, string $query): array
     {
-        $crawler = $this->getCrawler($url);
-        $crawler->filter($query)->each(function ($node) {
-            dd($node);
-            yield $node;
+        return $this->getCrawler($url)
+             ->filter($query)
+             ->each(function ($node) {
+                 return $node;
         });
-        dd('k');
     }
 
     protected function getCrawler(String $url): Crawler
