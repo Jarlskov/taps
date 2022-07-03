@@ -4,20 +4,15 @@ declare(strict_types=1);
 
 namespace App\Jobs;
 
-use App\Mappers\UntappdMapper;
 use App\Models\Beer;
 use App\Models\Brewery;
-use App\Models\Country;
 use App\Models\Tap;
-use App\Repositories\BeerRepository;
-use App\Repositories\BreweryRepository;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Jarlskov\Untappd\Untappd;
 use Jarlskov\Untappd\Models\Brewery as UntappdBrewery;
 
 class UpdateTapByUntappdId extends AbstractUpdateTap implements ShouldQueue
@@ -37,36 +32,16 @@ class UpdateTapByUntappdId extends AbstractUpdateTap implements ShouldQueue
         $this->untappdId = $untappdId;
     }
 
-    protected function getBeer(
-        BeerRepository $beerRepository,
-        BreweryRepository $breweryRepository,
-        Untappd $untappd,
-        UntappdMapper $mapper
-    ): Beer {
-        $beer = $beerRepository->findByUntappdId($this->untappdId);
+    protected function getBeer(): ?Beer
+    {
+        $beer = $this->beerRepository->findByUntappdId($this->untappdId);
         if ($beer) {
             return $beer;
         }
 
-        $untappdBeer = $untappd->getBeer($this->untappdId);
-        $brewery = $breweryRepository->findByUntappdId($untappdBeer->getBrewery()->getBreweryId());
-        if (!$brewery) {
-            $brewery = $this->createBrewery($untappdBeer->getBrewery(), $mapper);
-        }
-        $beer = $mapper->mapBeer($untappdBeer);
-        $beer->brewery()->associate($brewery);
-        $beer->save();
+        $untappdBeer = $this->untappd->getBeer($this->untappdId);
+        $brewery = $this->findOrMapBrewery($untappdBeer->getBrewery());
 
-        return $beer;
-    }
-
-    private function createBrewery(UntappdBrewery $untappdBrewery, UntappdMapper $mapper): Brewery
-    {
-        $country = Country::firstOrCreate(['name' => $untappdBrewery->getCountryName()]);
-        $brewery = $mapper->mapBrewery($untappdBrewery);
-        $brewery->country()->associate($country);
-        $brewery->save();
-
-        return $brewery;
+        return $this->mapBeer($untappdBeer, $brewery);
     }
 }

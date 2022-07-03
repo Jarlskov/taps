@@ -12,4 +12,9 @@ class BreweryRepository
     {
         return Brewery::where(['untappd_id' => $untappdId])->first();
     }
+
+    public function findByName(string $name): ?Brewery
+    {
+        return Brewery::where(['name' => $name])->first();
+    }
 }
