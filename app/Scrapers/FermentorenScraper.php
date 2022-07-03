@@ -8,11 +8,12 @@ use App\Jobs\UpdateTapByUntappdId;
 
 class FermentorenScraper extends AbstractScraper
 {
+    protected string $tableQuery = '.item .item-name a';
     private string $url = 'https://fermentoren.com/';
 
     public function scrape(): void
     {
-        foreach ($this->scrapeList($this->url, '.item .item-name a') as $node) {
+        foreach ($this->scrapeList($this->url) as $node) {
             $tapName = $node->filter('.tap-number-hideable')->first()->text();
             $tap = $this->bar->getOrCreateTapByName($tapName);
 

@@ -6,13 +6,15 @@ namespace App\Scrapers;
 
 use App\Jobs\UpdateTapByUntappdId;
 
-class ØlbarenScraper extends AbstractScraper
+class OelbarenScraper extends AbstractScraper
 {
+    protected string $tableQuery = '#beerTable tr';
+
     private string $url = 'https://oelbaren.dk/oel/';
 
     public function scrape(): void
     {
-        foreach ($this->scrapeList($this->url, '#beerTable tr') as $node) {
+        foreach ($this->scrapeList($this->url) as $node) {
             $tapName = $node->filter('.tapnumber')->first()->text();
             $tap = $this->bar->getOrCreateTapByName($tapName);
 

@@ -8,11 +8,12 @@ use App\Jobs\UpdateTapByUntappdId;
 
 class TaphouseScraper extends AbstractScraper
 {
+    protected string $tableQuery = '#beerTable tbody tr';
     private string $url = 'https://taphouse.dk/';
 
     public function scrape(): void
     {
-        foreach ($this->scrapeList($this->url, '#beerTable tbody tr') as $node) {
+        foreach ($this->scrapeList($this->url) as $node) {
             $tapName = $node->filter('.tapNumber')->first()->text();
             $tap = $this->bar->getOrCreateTapByName($tapName);
 

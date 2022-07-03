@@ -92,5 +92,5 @@ abstract class AbstractUpdateTap implements ShouldQueue
         return $brewery;
     }
 
-    protected abstract function getBeer(): ?Beer;
+    abstract protected function getBeer(): ?Beer;
 }

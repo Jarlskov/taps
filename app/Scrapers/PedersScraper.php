@@ -8,11 +8,13 @@ use App\Jobs\UpdateTapByUntappdId;
 
 class PedersScraper extends AbstractScraper
 {
+    protected string $tableQuery = '#menu-10216 .menu-item .item';
+
     private string $url = 'https://pederscph.dk/';
 
     public function scrape(): void
     {
-        foreach ($this->scrapeList($this->url, '#menu-10216 .menu-item .item') as $node) {
+        foreach ($this->scrapeList($this->url) as $node) {
             $tapName = $node->filter('.tap-number-hideable')->first()->text();
             $tap = $this->bar->getOrCreateTapByName($tapName);
 
